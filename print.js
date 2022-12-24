@@ -5,11 +5,6 @@ const fs = require('fs');
 let options = { format: 'A4' };
 const cliSelect = require('cli-select');
 const chalk = require('chalk');
-// Example of options with args //
-// let options = { format: 'A4', args: ['--no-sandbox', '--disable-setuid-sandbox'] };
-// var printer = require("@thiagoelg/node-printer"),
-//     util = require('util');
-// console.log("installed printers:\n"+util.inspect(printer.getPrinters(), {colors:true, depth:10}));
 
 
 let file = { content: "<h1>ADIT ASUUUUU</h1>" };
@@ -22,25 +17,21 @@ html_to_pdf.generatePdf(file, options).then(async pdfBuffer => {
   const tmpFilePath = path.join(`./tmp/${Math.random().toString(36).substr(7)}.pdf`);
 
   let data = await ptp.getPrinters ();
-  let printers = [];
-  data.forEach((itm)=>{
-    printers.push(itm.name);
-  })
+
   console.log("PILIH PRINTER: ");
   cliSelect({
-    values: printers,
+    values: data,
     valueRenderer: (value, selected) => {
         if (selected) {
-            return chalk.underline(value);
+            return chalk.underline(value.name);
         }
  
-        return value;
+        return value.name;
     },
 }).then(async (printer_dipilih)=>{
-
     fs.writeFileSync(tmpFilePath, pdfBuffer);
     const options2 = {
-        printer: printer_dipilih.value
+        printer: printer_dipilih.value.name
       };
       await ptp.print(tmpFilePath, options2);
       fs.unlinkSync(tmpFilePath);
