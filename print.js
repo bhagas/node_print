@@ -4,11 +4,12 @@ const path = require('path');
 const fs = require('fs');
 let options = { format: 'A4' };
 
+var cors = require('cors')
 const express = require('express')
 const app = express()
 const port = 3000
 
-
+app.use(cors())
 app.get('/print', (req, res) => {
     let file = { content: `<h1>${req.query.no_antrian} ${req.query.tempat} ${req.query.sisa_antrian}</h1>` };
     // or //
