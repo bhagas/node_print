@@ -2,15 +2,15 @@ var html_to_pdf = require('html-pdf-node');
 const ptp = require("pdf-to-printer")
 const path = require('path');
 const fs = require('fs');
-let options = { width: '58mm' };
+let options = { width: '58mm', preferCSSPageSize: true };
 const moment = require("moment")
 var cors = require('cors')
 const express = require('express')
 const app = express()
 const port = 3000
-const ip_be= 'http://103.121.123.87:8004/';
+// const ip_be= 'http://103.121.123.87:8004/';
 
-// const ip_be= 'http://194.169.46.107:8004/';
+const ip_be= 'http://194.169.46.107:8004/';
 moment.locale("ID")
 const tgl = moment(new Date).format("dddd, DD MMMM YYYY")
 const jam = moment(new Date).format("HH:mm:ss")
