@@ -80,7 +80,7 @@ app.get('/print', (req, res) => {
 // </body>
 // </html>` };
     // or //
-    let file = { url: ip_be+`print/printAntrian?tgl=${tgl}&jam=${jam}&no_antrian=${req.query.no_antrian}&tempat=${req.query.tempat}&sisa_antrian=${req.query.sisa_antrian}` };
+    let file = { url: ip_be+`print/printAntrian?tgl=${tgl}&jam=${jam}&no_antrian=${req.query.no_antrian}&tempat=${req.query.tempat}&sisa_antrian=${req.query.sisa_antrian}&poli_nama=${req.query.poli_nama}` };
 
     
     html_to_pdf.generatePdf(file, options).then(async pdfBuffer => {
